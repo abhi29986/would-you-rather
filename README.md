@@ -9,7 +9,7 @@ This project consists of a small quiz game,  built in React & Redux, that quizze
 * [Redux](https://redux.js.org/)
 * [React Router](https://github.com/ReactTraining/react-router)
 * [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-* [reactstrap - Easy to use React Bootstrap 4 components] (https://reactstrap.github.io/)
+* [reactstrap - Easy to use React Bootstrap 4 components](https://reactstrap.github.io/)
 
 ### Getting started
 
