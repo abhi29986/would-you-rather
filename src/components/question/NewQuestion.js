@@ -102,7 +102,6 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
-//disabled={optionOne === "" || optionTwo === ""}
 
 NewQuestion.propTypes = {
   addNewQuestion: PropTypes.func.isRequired,

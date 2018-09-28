@@ -11,6 +11,7 @@ export default function(state = {}, action) {
         ...state,
         ...action.users
       };
+       //Deep clone of state immutably
     case ADD_USER_QUESTION:
       return {
         ...state,
@@ -19,6 +20,7 @@ export default function(state = {}, action) {
           questions: state[action.authedUser].questions.concat([action.qid])
         }
       };
+       //Deep clone of state immutably
     case ADD_USER_ANSWER:
       const { authedUser, qid, answer } = action;
       return {

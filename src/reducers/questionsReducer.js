@@ -18,6 +18,7 @@ export default function(state = {}, action) {
         ...action.questions
       };
 
+      //Deep clone of state immutably
     case SAVE_QUESTION_ANSWER:
       const { authedUser, qid, answer } = action;
       return {

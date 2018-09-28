@@ -39,6 +39,7 @@ class DashBoard extends Component {
     );
     return (
       <div>
+       <h4 className="display-4 text-center">Dashboard</h4>
         <Nav tabs>
           <NavItem>
             <NavLink
