@@ -9,6 +9,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class NavBar extends Component {
+  
+  //logout on click event for a logged in user
   logout = e => {
     e.preventDefault();
     const { history, logoutUser } = this.props;
@@ -63,6 +65,7 @@ const mapStateToProps = state => {
   };
 };
 
+//proptype validation
 NavBar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   authedUser: PropTypes.string,

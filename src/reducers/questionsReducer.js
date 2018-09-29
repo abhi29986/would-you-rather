@@ -1,9 +1,9 @@
 import {
-  RECEIVE_QUESTIONS,
+  GET_QUESTIONS,
   ADD_QUESTION,
   SAVE_QUESTION_ANSWER
 } from "../actions/types";
-
+// Reducer function for get inital questions,add a new question & save answer for the question.
 export default function(state = {}, action) {
   switch (action.type) {
     case ADD_QUESTION:
@@ -12,7 +12,7 @@ export default function(state = {}, action) {
         ...state,
         [question.id]: question
       };
-    case RECEIVE_QUESTIONS:
+    case GET_QUESTIONS:
       return {
         ...state,
         ...action.questions

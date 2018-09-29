@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -18,16 +17,20 @@ import { handleSaveQuestionAnswer } from "../../actions/sharedAction";
 import PropTypes from "prop-types";
 
 class QuestionDetails extends Component {
+  
+  //defining initial sate for selected answer state. initiallly empty value is assigned.
   state = {
     selected: ""
   };
 
+//setting the state of the answer of a question based on the answer selection
   onRadioSelect = e => {
     this.setState({
       selected: e.target.value
     });
   };
 
+//onsubmit function to save answer of a question
   onSubmit = e => {
     e.preventDefault();
     this.props.saveQuestionAnswer(this.state.selected);
@@ -41,12 +44,10 @@ class QuestionDetails extends Component {
     const isOptionTwoAnswered = question.optionTwo.votes.includes(authedUser);
     const isAnswered = isOptionOneAnswered || isOptionTwoAnswered;
 
-    if (!question) {
-      return <Redirect to="/not-found" />;
-    }
 
     const { selected } = this.state;
-
+    
+	//No of vote & % calculation for different options
     const noOfVotesOpt1 = question.optionOne.votes.length;
     const noOfVotesOpt2 = question.optionTwo.votes.length;
     const totalVote = noOfVotesOpt1 + noOfVotesOpt2;
@@ -92,8 +93,8 @@ class QuestionDetails extends Component {
                         {question.optionOne.text}
                       </Label>
                     </FormGroup>
-                    <FormGroup check>
-                      <Label check>
+                    <FormGroup >
+                      <Label >
                         <Input
                           type="radio"
                           name="radio1"

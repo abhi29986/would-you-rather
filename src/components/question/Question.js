@@ -2,23 +2,24 @@ import React from "react";
 import { connect } from "react-redux";
 import { Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import { withRouter } from "react-router-dom";
+import capitalizeFirstLetter from "../../validation/captitalizeFirstLetter";
 import PropTypes from "prop-types";
 
 const Question = props => {
+  //get the details for a particular question based question id & on click event
   const onQuestionDetails = (event, id) => {
     event.preventDefault();
     props.history.push(`/questions/${id}`);
   };
-  /*  function capitalizeFistLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }*/
+
   const { question } = props;
 
   const noOfVotesOpt1 = question.optionOne.votes.length;
   const noOfVotesOpt2 = question.optionTwo.votes.length;
   const totalVote = noOfVotesOpt1 + noOfVotesOpt2;
 
-  //const capitalizeAuthor = capitalizeFistLetter(question.author);
+  // capitalize first letter of Author name.
+  const capitalizeAuthor = capitalizeFirstLetter(question.author);
   return (
     <Card
       body
@@ -28,7 +29,7 @@ const Question = props => {
     >
       <CardHeader>
         <strong>Question asked by: </strong>
-        {question.author}
+        {capitalizeAuthor}
       </CardHeader>
       <CardBody>
         <CardTitle>Would You Rather?</CardTitle>

@@ -17,9 +17,12 @@ import { loginUser } from "../../actions/authedUserAction";
 import PropTypes from "prop-types";
 
 class Login extends Component {
+  //initializing auth state for a user, initially user id should be empty
   state = {
     uid: ""
   };
+
+//on click function for user login
   onUserLogin = () => {
     const { uid } = this.state;
     const { loginUser } = this.props;
@@ -28,6 +31,7 @@ class Login extends Component {
     }
   };
 
+// changing the local state of a user based on selected user
   onSelectUser = event => {
     const uid = event.target.value;
     this.setState({ uid });

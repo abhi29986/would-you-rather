@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+//class based reusable user component to  display user image with name.
 class User extends Component {
   render() {
     const { user } = this.props;

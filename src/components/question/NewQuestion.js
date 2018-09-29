@@ -17,11 +17,13 @@ import { handleAddQuestion } from "../../actions/sharedAction";
 import PropTypes from "prop-types";
 
 class NewQuestion extends Component {
+  //defining the initial state for 2 options for a question, Initial local state is empty
   state = {
     optionOne: "",
     optionTwo: ""
   };
 
+//onchange function to set local state for option 1 value
   onOptionOneChange = e => {
     e.preventDefault();
     this.setState({
@@ -29,6 +31,7 @@ class NewQuestion extends Component {
     });
   };
 
+//onchange function to set local state for option 2 value
   onOptionTwoChange = e => {
     e.preventDefault();
     this.setState({
@@ -36,6 +39,7 @@ class NewQuestion extends Component {
     });
   };
 
+//onsubmit function for adding new question
   onSubmit = e => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
@@ -95,6 +99,7 @@ class NewQuestion extends Component {
   }
 }
 
+// dispatching action as props for add a new question
 function mapDispatchToProps(dispatch) {
   return {
     addNewQuestion: (optionOne, optionTwo) => {

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const LeaderBoard = props => {
   const { users } = props;
-  // calculate poll details with asked and answered properties
+ // calculate poll details with asked and answered properties
   const userWithDetailsArray = Object.keys(users).map(id => ({
     id,
     asked: users[id].questions.length,

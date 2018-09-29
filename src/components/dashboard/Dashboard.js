@@ -14,7 +14,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 class DashBoard extends Component {
-  //Refer https://reactstrap.github.io/components/tabs/ for tab toggling
+ //Refer https://reactstrap.github.io/components/tabs/ for tab toggling
+  
   state = {
     activeTab: "1"
   };

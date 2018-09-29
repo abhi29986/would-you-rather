@@ -1,12 +1,13 @@
 import {
-  RECEIVE_USERS,
+  GET_USERS,
   ADD_USER_ANSWER,
   ADD_USER_QUESTION
 } from "../actions/types";
 
+// Reducer function for get initial users,add an answer for a user & add asked question to user portfolio
 export default function(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_USERS:
+    case GET_USERS:
       return {
         ...state,
         ...action.users

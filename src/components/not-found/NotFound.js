@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+//Functional component for Page/Link Not Found . and link to go back to Login Page
 export default () => {
   return (
     <div>
