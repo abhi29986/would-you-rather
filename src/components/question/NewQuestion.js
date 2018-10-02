@@ -23,19 +23,11 @@ class NewQuestion extends Component {
     optionTwo: ""
   };
 
-//onchange function to set local state for option 1 value
-  onOptionOneChange = e => {
+//Refactoring: onchange function to set local state depends on option
+  onOptionChange = e => {
     e.preventDefault();
     this.setState({
-      optionOne: e.target.value
-    });
-  };
-
-//onchange function to set local state for option 2 value
-  onOptionTwoChange = e => {
-    e.preventDefault();
-    this.setState({
-      optionTwo: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -43,8 +35,9 @@ class NewQuestion extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    this.props.addNewQuestion(optionOne, optionTwo);
-    const { history } = this.props;
+    //not able to destructure please suggest.
+    const { history,addNewQuestion } = this.props;
+    addNewQuestion(optionOne, optionTwo);
     history.push("/");
   };
 
@@ -68,8 +61,8 @@ class NewQuestion extends Component {
                   </InputGroupAddon>
                   <Input
                     placeholder="Add Option One"
-                    value={optionOne}
-                    onChange={this.onOptionOneChange}
+                    name="optionOne"
+                    onChange={this.onOptionChange}
                   />
                 </InputGroup>
                 <br />
@@ -79,8 +72,8 @@ class NewQuestion extends Component {
                   </InputGroupAddon>
                   <Input
                     placeholder="Add Option One"
-                    value={optionTwo}
-                    onChange={this.onOptionTwoChange}
+                    name="optionTwo"
+                    onChange={this.onOptionChange}
                   />
                 </InputGroup>
                 <br />

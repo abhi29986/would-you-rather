@@ -32,12 +32,15 @@ class DashBoard extends Component {
 
     const user = users[authedUser];
     //Finding the Questions Id for the answered polls
-    const answeredPolls = Object.keys(user.answers);
+	//sort based on latest timestamp
+    const answeredPolls = Object.keys(user.answers)
+    .sort((x, y) => questions[y].timestamp - questions[x].timestamp);
 
     //Finding the Questions Id for the unanswered polls
+	//sort based on latest timestamp
     const unansweredPolls = Object.keys(questions).filter(
-      qid => !answeredPolls.includes(qid)
-    );
+      qid => !answeredPolls.includes(qid))
+     .sort((x, y) => questions[y].timestamp - questions[x].timestamp);
     return (
       <div>
        <h4 className="display-4 text-center">Dashboard</h4>

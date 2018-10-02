@@ -12,10 +12,10 @@ class NavBar extends Component {
   
   //logout on click event for a logged in user
   logout = e => {
-    e.preventDefault();
+    //e.preventDefault();
     const { history, logoutUser } = this.props;
     //on logout returning back to login page page.
-    history.push("/");
+    history.push("/login");
     logoutUser();
   };
 

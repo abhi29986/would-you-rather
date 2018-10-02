@@ -10,7 +10,7 @@ class User extends Component {
     return (
       <Fragment>
         <img
-          src={user.avatarURL}
+          src={`/${user.avatarURL}`}
           className="rounded-circle"
           style={{ width: "50px", marginRight: "5px", marginTop: "5px" }}
           alt={`${user.name}`}

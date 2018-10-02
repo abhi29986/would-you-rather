@@ -10,8 +10,8 @@ import LeaderBoard from "./components/dashboard/LeaderBoard";
 import NewQuestion from "./components/question/NewQuestion";
 import NotFound from "./components/not-found/NotFound";
 import { handleInitialData } from "./actions/sharedAction";
-import isEmpty from "./validation/is-empty";
 import PropTypes from "prop-types";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 class App extends Component {
   //Loading the Initial data during the componentDidMount lifecycle
@@ -19,8 +19,6 @@ class App extends Component {
     this.props.handleInitialData();
   }
   render() {
-    const { isAuthenticated } = this.props;
-
     return (
       <Router>
         <Fragment>
@@ -28,16 +26,17 @@ class App extends Component {
             <NavBar />
             <div className="container">
               <Switch>
-                {!isAuthenticated ? (
-                  <Route path="/" exact component={Login} />
-                ) : (
-                  <Fragment>
-                    <Route path="/" exact component={Dashboard} />
-                    <Route path="/questions/:id" component={QuestionDetails} />
-                    <Route path="/add" component={NewQuestion} />
-                    <Route path="/leaderboard" component={LeaderBoard} />
-                  </Fragment>
-                )}
+                <PrivateRoute path="/" exact component={Dashboard} />
+
+                <PrivateRoute
+                  path="/questions/:id"
+                  component={QuestionDetails}
+                />
+
+                <PrivateRoute path="/add" component={NewQuestion} />
+
+                <PrivateRoute path="/leaderboard" component={LeaderBoard} />
+                <Route path="/login" exact component={Login} />
                 <Route component={NotFound} />
               </Switch>
             </div>
@@ -49,14 +48,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
-  return {
-    isAuthenticated: !isEmpty(authedUser)
-  };
-}
-
 App.propTypes = {
-  handleInitialData: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  handleInitialData: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, { handleInitialData })(App);
+export default connect(null, { handleInitialData })(App);

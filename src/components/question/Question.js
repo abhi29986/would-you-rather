@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import { withRouter } from "react-router-dom";
-import capitalizeFirstLetter from "../../validation/captitalizeFirstLetter";
+import localDateAndTimeFormatter from "../../validation/localDateAndTimeFormatter";
+import User from "../user/User";
 import PropTypes from "prop-types";
 
 const Question = props => {
@@ -18,9 +19,7 @@ const Question = props => {
   const noOfVotesOpt2 = question.optionTwo.votes.length;
   const totalVote = noOfVotesOpt1 + noOfVotesOpt2;
 
-  // capitalize first letter of Author name.
-  const capitalizeAuthor = capitalizeFirstLetter(question.author);
-  return (
+   return (
     <Card
       body
       inverse
@@ -28,8 +27,10 @@ const Question = props => {
       onClick={event => onQuestionDetails(event, question.id)}
     >
       <CardHeader>
-        <strong>Question asked by: </strong>
-        {capitalizeAuthor}
+        <User id={question.author} />
+        <div style={{ marginLeft: "5px" }}>
+          On {localDateAndTimeFormatter(question.timestamp)}
+        </div>
       </CardHeader>
       <CardBody>
         <CardTitle>Would You Rather?</CardTitle>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect, withRouter } from "react-router-dom";
 import {
   Button,
   Card,
@@ -17,29 +18,46 @@ import { loginUser } from "../../actions/authedUserAction";
 import PropTypes from "prop-types";
 
 class Login extends Component {
-  //initializing auth state for a user, initially user id should be empty
+  //initializing auth state for a user, initially user id should be empty and authHome will be false
   state = {
-    uid: ""
+    uid: "",
+    authHome: false
   };
 
 //on click function for user login
   onUserLogin = () => {
-    const { uid } = this.state;
-    const { loginUser } = this.props;
+    //const { uid } = this.state;
+    //const { loginUser } = this.props;
+    const {state:{uid},props:{loginUser}}=this;
     if (uid) {
       loginUser(uid);
+      this.setState(previousState => {
+        return {
+          ...previousState,
+          authHome: true
+        };
+      });
     }
   };
 
 // changing the local state of a user based on selected user
   onSelectUser = event => {
-    const uid = event.target.value;
+    //const uid = event.target.value;
+    const {value:uid}=event.target;
     this.setState({ uid });
   };
 
   render() {
-    const { users } = this.props;
-    const { uid } = this.state;
+    const { users,history } = this.props;
+    const { uid, authHome } = this.state;
+    // If authenticated redirect to dashboard or history location
+	if (authHome) {      
+      const redirect = history.location.state;
+      if (redirect != null) {
+        return <Redirect to={redirect} push={true} />;
+      }
+      return <Redirect to="/" />;
+    }
     return (
       <Row>
         <Col sm="16" md={{ size: 8, offset: 2 }}>
@@ -92,4 +110,4 @@ Login.propTypes = {
   loginUser: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

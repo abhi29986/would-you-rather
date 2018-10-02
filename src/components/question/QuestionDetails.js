@@ -13,7 +13,10 @@ import {
   Row,
   Col
 } from "reactstrap";
+import { GoCheck } from "react-icons/go";
+import User from "../user/User";
 import { handleSaveQuestionAnswer } from "../../actions/sharedAction";
+import localDateAndTimeFormatter from "../../validation/localDateAndTimeFormatter";
 import PropTypes from "prop-types";
 
 class QuestionDetails extends Component {
@@ -43,8 +46,6 @@ class QuestionDetails extends Component {
     //Check whether option 2 is answered by the logged in juser
     const isOptionTwoAnswered = question.optionTwo.votes.includes(authedUser);
     const isAnswered = isOptionOneAnswered || isOptionTwoAnswered;
-
-
     const { selected } = this.state;
     
 	//No of vote & % calculation for different options
@@ -52,7 +53,10 @@ class QuestionDetails extends Component {
     const noOfVotesOpt2 = question.optionTwo.votes.length;
     const totalVote = noOfVotesOpt1 + noOfVotesOpt2;
     const opt1Percentage = (noOfVotesOpt1 / totalVote).toFixed(2) * 100;
-    const opt2Percentage = (noOfVotesOpt1 / totalVote).toFixed(2) * 100;
+    const opt2Percentage = (noOfVotesOpt2 / totalVote).toFixed(2) * 100;
+
+    // Marker for selected option
+    const selectMark = <GoCheck color="yellow" />;
 
     return (
       <Row>
@@ -63,8 +67,10 @@ class QuestionDetails extends Component {
             style={{ backgroundColor: "#393c42", borderColor: "#333" }}
           >
             <CardHeader>
-              <strong>Question asked by: </strong>
-              {questionAuthor.id}
+              <User id={questionAuthor.id} />
+              <div style={{ marginLeft: "5px" }}>
+                On {localDateAndTimeFormatter(question.timestamp)}
+              </div>
             </CardHeader>
             <CardBody>
               <CardTitle>Would You Rather?</CardTitle>
@@ -72,11 +78,11 @@ class QuestionDetails extends Component {
                 <ul>
                   <li>
                     {question.optionOne.text} ({noOfVotesOpt1} vote | {" "}
-                    {opt1Percentage}%)
+                    {opt1Percentage}%) {isOptionOneAnswered ? selectMark : null}
                   </li>
                   <li>
                     {question.optionTwo.text} ({noOfVotesOpt2} vote | {" "}
-                    {opt2Percentage}%)
+                    {opt2Percentage}%) {isOptionTwoAnswered ? selectMark : null}
                   </li>
                 </ul>
               ) : (
